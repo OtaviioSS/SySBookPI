@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="templates/layout.xhtml"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h1>SERVIÇO</h1>
+        <p:growl id="msg"/>
+
+        <h:form id="form">
+
+            <p:dataTable styleClass="tabelalivros" id="tabela"
+                         var="item"
+                         value="#{servicoBean.servicos}"
+                         editable="true">
+
+                <p:column style="width:100px" styleClass="tablecolum">
+                    <p:commandButton actionListener="#{servicoBean.prepararExclusao(item)}" 
+                                      onclick="PF('dl_deletar').show();"   
+                                      value="Deletar"
+                                      style="background: none;border-color: 
+                                      #EC1919;color: #EC1919" />
+                </p:column>
+
+                <p:column headerText="Serviço" styleClass="tablecolum">
+                    <h:outputText value="#{item.tiposervico}"/>
+                </p:column>
+
+                <p:column headerText="Livro" styleClass="tablecolum">
+                    <h:outputText value="#{item.livro}"/>
+                </p:column>
+
+                <p:column headerText="Cliente" styleClass="tablecolum">
+                    <p:cellEditor>
+                        <f:facet name="output"> <h:outputText value="#{item.cpfcliente}"/> </f:facet>
+                        <f:facet name="input"> <p:spinner value="0"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Data de Emprestimo" styleClass="tablecolum">
+                    <h:outputText value="#{item.dataemprestimo}"/>
+                </p:column>
+
+                <p:column headerText="Data de devolução" styleClass="tablecolum">
+                    <h:outputText  style="" value="#{item.datadevolucao}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column style="width: 35px" styleClass="tablecolum">
+                    <p:rowEditor/>
+                </p:column>
+
+
+            </p:dataTable>
+            <!-- Modal-->
+
+            <p:dialog styleClass="dialog" id="dl_deletar" header="Remover Serviço" widgetVar="dl_deletar" modal="true">
+                <p>Tem serteza que deseja excluir esse serviço ?</p>
+                <p:commandButton value="Sim"  action="#{servicoBean.deletar()}" update="grid" />
+                <p:commandButton value="Não" type="button" onclick="PF('dl_deletar').hide();" />
+            </p:dialog>
+
+            <p:dialog id="dialog" header="Registrar serviço" widgetVar="dl_registrar" modal="true">
+                <p:panelGrid id="grid" columns="2">
+
+                    <p:outputLabel value="Serviço: "/>
+                    <p:selectOneMenu  id="servico"  value="#{servicoBean.servico.tiposervico}">
+                        <f:selectItem itemLabel="Selecione" itemValue="" />
+                        <f:selectItem itemLabel="Emprestimo" itemValue="Emprestimo" />
+                        <f:selectItem itemLabel="Devolução" itemValue="Devolução" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Cliente(CPF)" />
+                    <p:inputMask mask="999.999.999.-99" id="cliente"  value="#{servicoBean.servico.cpfcliente}"  />                 
+                    <p:outputLabel value="Livro: "/>
+                    <p:selectOneMenu id="livro" value="#{servicoBean.servico.livro}" style="width: 150px">
+                        <f:selectItem itemLabel="Selecione" itemEscaped="" noSelectionOption="true"/>
+                        <f:selectItems value="#{servicoBean.codesAcao}" noSelectionValue="true"/>
+                    </p:selectOneMenu>
+
+
+
+
+
+                    <p:outputLabel value="Data de Devolução"/>
+                    <p:inputMask mask="99/99/9999" id="datadevolucao"  value="#{servicoBean.servico.datadevolucao}"  />
+
+                    <p:outputLabel value="Data de Emprestimo"/>
+                    <p:inputMask mask="99/99/9999" id="dataemprestimo" value="#{servicoBean.servico.dataemprestimo}"   />
+
+
+                </p:panelGrid>
+                <p:separator/>
+                <p:row  id="rowsalvar"> <!-- linha 4 -->
+                    <p:column colspan="2" styleClass="tablecolum">
+                        <p:commandButton styleClass="meu-botao" style="" value="Salvar" update="grid" action="#{servicoBean.salvar()}"/>
+                    </p:column>
+
+                </p:row>
+            </p:dialog>
+            <p:commandButton styleClass="meu-botao" style="" value="Realizar serviço" oncomplete="PF('dl_registrar').show();"/>
+        </h:form>
+    </ui:define>
+
+
+</ui:decorate>

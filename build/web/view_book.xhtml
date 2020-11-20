@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="templates/layout.xhtml"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+    <ui:define name="content">
+        <h1>lIVROS</h1>
+        <p:growl id="msg"/>
+
+        <h:form id="form">
+
+
+
+
+            <!-- Lista datatable-->
+            <p:dataTable styleClass="tabelalivros" id="tabela"
+                         var="item"
+                         value="#{livroBean.livros}"
+                         editable="true">
+
+                <p:ajax event="rowEdit" listener="#{livroBean.onRowEdit}"/>
+                <p:ajax event="rowEditCancel" listener="#{livroBean.onRowCancel}"/>
+
+                <p:column styleClass="tablecolum" style="width:100px">
+                    <p:commandButton style="background: none;border-color: #EC1919;color: #EC1919" value="Deletar" action="#{livroBean.deletar(item)}" process="tabela"  />
+                </p:column>
+
+                <p:column headerText="Livro" styleClass="tablecolum">
+                    <p:cellEditor >
+                        <f:facet  name="output"> <h:outputText value="#{item.code}"/> </f:facet>
+                        <f:facet name="input"> <p:inputText value="#{item.code}" style="width:100%"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Autor" styleClass="tablecolum">
+                    <p:cellEditor>
+                        <f:facet name="output"> <h:outputText value="#{item.name}"/> </f:facet>
+                        <f:facet name="input"> <p:inputText value="#{item.name}" style="width:100%"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Codigo" styleClass="tablecolum">
+                    <p:cellEditor>
+                        <f:facet name="output"> <h:outputText value="#{item.autor}"/> </f:facet>
+                        <f:facet name="input"> <p:inputText value="#{item.autor}" style="width:100%"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column style="width:35px" styleClass="tablecolum">
+                    <p:rowEditor/>
+                </p:column>
+
+            </p:dataTable>
+            <p:separator/>
+            <div style="text-align: end;padding: 0">
+                <p:commandButton  styleClass="btnpadrao" value="Adicionar Livro" onclick="PF('dl_adicionar').show();"/>
+            </div>
+
+
+            <!-- Dialogo Modal-->
+            <p:dialog styleClass="dialogstyle" id="dialog"  style="padding: 0" header="Adicionar Livro" widgetVar="dl_adicionar" modal="true" height="250px">
+                <p:panelGrid id="grid" style="padding: 0" >
+
+                    <p:row id="rownome" > <!-- linha 1 -->
+                        <p:column styleClass="tablecolum">
+                            <p:outputLabel value="Nome do livro" styleClass="tablecolum"/>
+                        </p:column>
+                        <p:column styleClass="tablecolum">
+                            <p:inputText id="codigo" value="#{livroBean.livro.code}" required="true">
+                                <f:validateLength minimum="2"/>
+                            </p:inputText>
+                            <p:message for="codigo"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row id="rowautor"> <!-- linha 2 -->
+                        <p:column styleClass="tablecolum">
+                            <p:outputLabel value="Autor"/>
+                        </p:column>
+                        <p:column styleClass="tablecolum">
+                            <p:inputText id="nome" value="#{livroBean.livro.name}" required="true">
+                                <f:validateLength minimum="2"/>
+                            </p:inputText>
+                            <p:message for="nome"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row id="rowcodigo"> <!-- linha 3 -->
+                        <p:column styleClass="tablecolum">
+                            <p:outputLabel value="Codigo"/>
+                        </p:column>
+                        <p:column styleClass="tablecolum">
+                            <p:inputText id="autor" value="#{livroBean.livro.autor}" required="true">
+                                <f:validateLength minimum="2"/>
+                            </p:inputText>
+                            <p:message for="nome"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row  id="rowsalvar"> <!-- linha 4 -->
+                        <p:column colspan="2" styleClass="tablecolum">
+                            <p:commandButton styleClass="meu-botao" style="background-color:  #B05ADA; text-align: center; left: 0; right: 0;align-items: center;color: #ffffff;border: none;margin-top: 30px " value="Cadastrar Livro" update="grid" action="#{livroBean.salvar()}"/>
+                        </p:column>
+
+                    </p:row>
+
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+
+    </ui:define>      
+</ui:decorate>

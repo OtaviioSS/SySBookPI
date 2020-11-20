@@ -1,0 +1,175 @@
+.body{
+    margin: 0;
+    padding: 0;
+    background-image: url("Backgroundsys.png");
+    background-size: cover;
+    font-family: "Comfortaa", sans-serif;
+}
+.login{
+    border: none!important;
+    width: 320px;
+    height: 420px;
+    border: 2px solid #e8a53f;
+    border-radius: 80px 0px 80px 0px!important;
+    color: #FFF;
+    background: rgb(221, 160, 221);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 68px 28px;
+}
+.usuario {
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: 112px;
+}
+
+h1{
+    margin: 0;
+    padding-top: 0;
+    padding-left: 0;
+    padding-bottom: 20px;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 25px;
+}
+
+.login p{
+    border: none !important;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+.login input{
+    border: none !important;
+    width: 100%;
+    margin-bottom: 21px;
+}
+
+.login input[type="text"],
+input[type="password"] {
+    border: 0px !important;
+    border-bottom: 1px solid white;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: white;
+    font-size: 16px;
+}
+
+/**-----------------------------------------------------*/
+
+
+.btnpadrao{
+    width: 250px;
+    height: 35px;
+    background: #FFF;
+    padding: 0 !important;
+    transition: 0.2s;
+    background: #B05ADA !important;
+    border-radius: 6px !important;
+    color: white !important;
+    border: none;
+}
+.btnpadrao:hover{
+    border: 0px !important;
+    border-radius: 20px!important;
+    cursor: pointer!important;
+    background: #f4cb5a!important;
+    transition: 0.2s!important;
+}
+
+.login a {
+    font-weight: bold !important;
+    text-decoration: none !important;
+    font-size: 12px !important;
+    line-height: 20px !important;
+    color: #4b4b4b !important;
+    transition: 0.2s !important;
+}
+.login a:hover {
+    transition: 0.2s;
+    color: #B05ADA;
+}
+
+.body{
+    background-color: #FFF4F4;
+}
+.meu-botao{
+    background-color:#B05ADA; 
+    text-align: center; 
+    left: 0;
+    right: 0;
+    align-items: center;
+    color: #ffffff;border: none;
+    margin-top: 30px;
+    background: #B05ADA !important;
+    border-radius: 6px !important;
+    color: white !important;
+
+}
+
+
+.centralizar {text-align: right;}
+.menubar{
+    background: #ffffff !important;
+    height: 50px;
+    color: white !important;
+    border: none;
+    font-size: 22pt;
+    text-align: center;
+
+
+}
+.tabelalivros{
+
+    text-align: center !important;
+    background: none !important;
+    border: inactiveborder !important;
+    appearance: none;
+
+
+
+}
+.tablecolum{
+    background: none !important;
+    border: none!important;
+}
+.rowaddlivrp{
+    background: none !important;
+    border: none!important;
+    background-color: #EC1919;
+
+}
+.dialog{
+    border-radius: 20px !important;
+    background: #ffffff !important;
+    width: auto !important;
+    height: auto !important;
+    
+}
+.dia{
+    padding: 0px;
+}
+tr[id='rowsalvar'] {
+    border: inactiveborder !important;
+    text-align: center !important;
+
+}
+tr[id='rownome'] {
+    border: inactiveborder !important;
+}
+tr[id='rowautor'] {
+    border: inactiveborder !important;
+}
+tr[id='rowcodigo'] {
+    border: inactiveborder !important;
+    background-color: #ffffff;
+}
+.img-logo{
+    text-align: center;
+}

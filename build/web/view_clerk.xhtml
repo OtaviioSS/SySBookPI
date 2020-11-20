@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="templates/layout.xhtml"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+    <ui:define name="content">
+        <h1>ATENDENTE</h1>
+        <p:growl id="msg"/>
+
+        <h:form id="form">
+
+            <!-- Lista datatable-->
+            <p:dataTable styleClass="tabelalivros" id="tabela"
+                         var="item"
+                         value="#{atendenteBean.atendentes}"
+                         editable="true">
+
+                <p:ajax event="rowEdit" listener="#{atendenteBean.onRowEdit}"/>
+                <p:ajax event="rowEditCancel" listener="#{atendenteBean.onRowCancel}"/>
+
+                <p:column styleClass="tablecolum" style="width:100px">
+                    <p:commandButton style="background: none;border-color: #EC1919;color: #EC1919" value="Deletar" action="#{atendenteBean.deletar(item)}" process="tabela"  />
+                </p:column>
+
+                <p:column headerText="CPF" styleClass="tablecolum">
+                    <p:cellEditor >
+                        <f:facet  name="output"> <h:outputText value="#{item.cpfatendete}"/> </f:facet>
+                        <f:facet name="input"> <p:inputText value="#{item.cpfatendete}" style="width:100%"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Nome" styleClass="tablecolum">
+                    <p:cellEditor>
+                        <f:facet name="output"> <h:outputText value="#{item.nomeAtendente}"/> </f:facet>
+                        <f:facet name="input"> <p:inputText value="#{item.nomeAtendente}" style="width:100%"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Matricula" styleClass="tablecolum">
+                    <p:cellEditor>
+                        <f:facet name="output"> <h:outputText value="#{item.matriculaAtendente}"/> </f:facet>
+                        <f:facet name="input"> <p:inputText value="#{item.matriculaAtendente}" style="width:100%"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Cargo" styleClass="tablecolum">
+                    <p:cellEditor>
+                        <f:facet name="output"> <h:outputText value="#{item.cargoAtendente}"/> </f:facet>
+                        <f:facet name="input"> <p:inputText value="#{item.cargoAtendente}" style="width:100%"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column style="width:35px" styleClass="tablecolum">
+                    <p:rowEditor/>
+                </p:column>
+
+            </p:dataTable>
+            <p:separator/>
+            <div style="text-align: end">
+                <p:commandButton  styleClass="btnpadrao"  value="Adicionar Atendente" onclick="PF('dl_adicionar').show();"/>
+            </div>
+
+
+            <!-- Dialogo Modal-->
+            <p:dialog id="dialog"  style="padding: 0" header="Adcionar Atendente" widgetVar="dl_adicionar" modal="true" height="200">
+                <p:panelGrid id="grid" style="padding: 0" >
+
+                    <p:row id="rowcpf" > <!-- linha 1 -->
+                        <p:column styleClass="tablecolum">
+                            <p:outputLabel value="CPF" styleClass="tablecolum"/>
+                        </p:column>
+                        <p:column styleClass="tablecolum">
+                            <p:inputMask mask="999.999.999-99"  id="cpf" value="#{atendenteBean.atendente.cpfatendete}" required="true">
+                                <f:validateLength minimum="2"/>
+                            </p:inputMask>>
+                            <p:message for="cpf"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row id="rownome"> <!-- linha 2 -->
+                        <p:column styleClass="tablecolum">
+                            <p:outputLabel value="Nome"/>
+                        </p:column>
+                        <p:column styleClass="tablecolum">
+                            <p:inputText id="nome" value="#{atendenteBean.atendente.nomeAtendente}" required="true">
+                                <f:validateLength minimum="2"/>
+                            </p:inputText>
+                            <p:message for="nome"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row id="rowmatricula"> <!-- linha 3 -->
+                        <p:column styleClass="tablecolum">
+                            <p:outputLabel value="Matricula"/>
+                        </p:column>
+                        <p:column styleClass="tablecolum">
+                            <p:inputText id="matricula" value="#{atendenteBean.atendente.matriculaAtendente}" required="true">
+                                <f:validateLength minimum="2"/>
+                            </p:inputText>
+                            <p:message for="nome"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row id="rowcargo"> <!-- linha 4 -->
+                        <p:column styleClass="tablecolum">
+                            <p:outputLabel value="Cargo"/>
+                        </p:column>
+                        <p:column styleClass="tablecolum">
+                            <p:inputText id="autor" value="#{atendenteBean.atendente.cargoAtendente}" required="true">
+                                <f:validateLength minimum="2"/>
+                            </p:inputText>
+                            <p:message for="nome"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row  id="rowsalvar"> <!-- linha 4 -->
+                        <p:column colspan="2" styleClass="tablecolum">
+                            <p:commandButton styleClass="meu-botao" style="background-color:#B05ADA; text-align: center; left: 0; right: 0;align-items: center;color: #ffffff;border: none;margin-top: 30px " value="Cadastrar Livro" update="grid" action="#{atendenteBean.salvar()}" oncomplete="PF('dl_adicionar').hide();" />
+                        </p:column>
+
+                    </p:row>
+
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+
+    </ui:define>      
+</ui:decorate>

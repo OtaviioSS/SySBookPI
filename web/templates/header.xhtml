@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+
+
+    <h:body>
+        <h:form>
+            <link type="text/css" rel="stylesheet" href="#{request.contextPath}/index.css" />
+
+            <p:menubar styleClass="menubar">
+
+                <p:menuitem value="Home" url="index.jsf"/>
+                <p:menuitem value="Livros" url="view_book.jsf"/>
+
+                <p:menuitem value="Serviços" url="view_ service.jsf"/>
+
+                <p:menuitem value="Atendente" url="view_clerk.jsf"/>
+
+                <p:menuitem value="Cliente" url="view_ client.jsf"/>
+
+            </p:menubar>
+        </h:form>
+
+        <hr/>
+    </h:body>
+
+
+</ui:composition>

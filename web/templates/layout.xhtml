@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/style.css" />
+
+
+    </h:head>
+    <h:body styleClass="body">
+
+        <div id="page">
+
+            <!-- Cabeçalho-->
+            <div id="header">
+                <ui:insert name="header"> <!--Área substituível pelo ui:define por quem vai usar este template-->
+                    <ui:include src="header.xhtml"/>
+
+                </ui:insert>
+            </div>
+
+            <!-- Conteúdo-->
+            <div id="content">
+                <ui:insert name="content"> <!--Área substituível pelo ui:define por quem vai usar este template-->
+                    <h1>Conteúdo Padrão</h1>
+                </ui:insert>
+            </div>
+
+            <!-- Rodapé-->
+            <div id="footer">
+                <ui:insert name="footer"> <!--Área substituível pelo ui:define por quem vai usar este template-->
+                    <ui:include src="footer.xhtml"/>
+                </ui:insert>
+            </div>
+        </div>
+
+    </h:body>
+</html>

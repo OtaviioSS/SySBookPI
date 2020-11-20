@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="templates/layout.xhtml"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+    <ui:define name="content">
+        <h1>CLIENTE</h1>
+        <p:growl id="msg"/>
+        <h:form id="form">
+
+            <!-- Lista datatable-->
+            <p:dataTable styleClass="tabelalivros" id="tabela"
+                         var="item"
+                         value="#{clienteBean.clientes}"
+                         editable="true">
+
+                <p:ajax event="rowEdit" listener="#{clienteBean.onRowEdit}"/>
+                <p:ajax event="rowEditCancel" listener="#{clienteBean.onRowCancel}"/>
+
+                <p:column styleClass="tablecolum" style="width:100px">
+                    <p:commandButton style="background: none;border-color: #EC1919;color: #EC1919" value="Deletar" action="#{clienteBean.deletar(item)}" process="tabela"  />
+                </p:column>
+
+                <p:column headerText="CPF" styleClass="tablecolum">
+                    <p:cellEditor >
+                        <f:facet  name="output"> <h:outputText value="#{item.cpf}"/> </f:facet>
+                        <f:facet name="input"> <p:inputText value="#{item.cpf}" style="width:100%"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Nome" styleClass="tablecolum">
+                    <p:cellEditor>
+                        <f:facet name="output"> <h:outputText value="#{item.nome}"/> </f:facet>
+                        <f:facet name="input"> <p:inputText value="#{item.nome}" style="width:100%"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+
+                <p:column headerText="Endereço" styleClass="tablecolum">
+                    <p:cellEditor>
+                        <f:facet name="output"> <h:outputText value="#{item.endereco}"/> </f:facet>
+                        <f:facet name="input"> <p:inputText value="#{item.endereco}" style="width:100%"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Email" styleClass="tablecolum">
+                    <p:cellEditor>
+                        <f:facet name="output"> <h:outputText value="#{item.email}"/> </f:facet>
+                        <f:facet name="input"> <p:inputText value="#{item.email}" style="width:100%"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Telefone" styleClass="tablecolum">
+                    <p:cellEditor>
+                        <f:facet name="output"> <h:outputText value="#{item.telefone}"/> </f:facet>
+                        <f:facet name="input"> <p:inputText value="#{item.telefone}" style="width:100%"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column style="width:35px" styleClass="tablecolum">
+                    <p:rowEditor/>
+                </p:column>
+
+            </p:dataTable>
+            <p:separator/>
+            <div style="text-align: end">
+                <p:commandButton  styleClass="btnpadrao"  value="Novo Cliente" onclick="PF('dl_adicionar').show();"/>
+            </div>
+
+
+            <!-- Dialogo Modal-->
+            <p:dialog id="dialog"  style="padding: 0" header="Novo cliente" widgetVar="dl_adicionar" modal="true" height="200">
+                <p:panelGrid id="grid" style="padding: 0" >
+
+                    <p:row id="rowcpf" > <!-- linha 1 -->
+                        <p:column styleClass="tablecolum">
+                            <p:outputLabel value="CPF" styleClass="tablecolum"/>
+                        </p:column>
+                        <p:column styleClass="tablecolum">
+                            <p:inputMask mask="999.999.999-99" id="cpf" value="#{clienteBean.cliente.cpf}" required="true">
+                                <f:validateLength minimum="2"/>
+                            </p:inputMask>
+                            <p:message for="cpf"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row id="rownome"> <!-- linha 2 -->
+                        <p:column styleClass="tablecolum">
+                            <p:outputLabel value="Nome Completo"/>
+                        </p:column>
+                        <p:column styleClass="tablecolum">
+                            <p:inputText id="nome" value="#{clienteBean.cliente.nome}" required="true">
+                                <f:validateLength minimum="2"/>
+                            </p:inputText>
+                            <p:message for="nome"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row id="rowendereco"> <!-- linha 3 -->
+                        <p:column styleClass="tablecolum">
+                            <p:outputLabel value="Endereço"/>
+                        </p:column>
+                        <p:column styleClass="tablecolum">
+                            <p:inputText id="endereco" value="#{clienteBean.cliente.endereco}" required="true">
+                                <f:validateLength minimum="2"/>
+                            </p:inputText>
+                            <p:message for="endereco"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row id="rowemail"> <!-- linha 4 -->
+                        <p:column styleClass="tablecolum">
+                            <p:outputLabel value="Email"/>
+                        </p:column>
+                        <p:column styleClass="tablecolum">
+                            <p:inputText id="email" value="#{clienteBean.cliente.email}" required="true">
+                                <f:validateLength minimum="2"/>
+                            </p:inputText>
+                            <p:message for="email"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row id="rowtelefone"> <!-- linha 5 -->
+                        <p:column styleClass="tablecolum">
+                            <p:outputLabel value="Telefone"/>
+                        </p:column>
+                        <p:column styleClass="tablecolum">
+                            <p:inputMask mask="(99)99999 - 9999" id="telefone" value="#{clienteBean.cliente.telefone}" required="true">
+                                <f:validateLength minimum="2"/>
+                            </p:inputMask>
+                            <p:message for="telefone"/>
+                        </p:column>
+                    </p:row>
+
+
+
+                    <p:row  id="rowsalvar"> <!-- linha 4 -->
+                        <p:column colspan="2" styleClass="tablecolum">
+                            <p:commandButton styleClass="meu-botao" style="background-color:  #B05ADA; text-align: center; left: 0; right: 0;align-items: center;color: #ffffff;border: none;margin-top: 30px " value="Cadastrar Cliente" update="grid" action="#{clienteBean.salvar()}"/>
+                        </p:column>
+
+                    </p:row>
+
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+
+    </ui:define>      
+</ui:decorate>

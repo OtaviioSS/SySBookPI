@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="templates/layout.xhtml"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:separator/>
+
+    <ui:define name="content">
+        <h:form>
+            <h1>LIVROS</h1>
+            <p:dataTable styleClass="tabelalivros" id="tabela"
+                         var="item"
+                         value="#{livroBean.livros}"
+                         editable="true">
+
+                <p:column styleClass="tablecolum" style="width:100px">
+
+                </p:column>
+
+                <p:column headerText="Livro" styleClass="tablecolum">
+                    <p:cellEditor >
+                        <f:facet  name="output"> <h:outputText value="#{item.code}"/> </f:facet>
+                        <f:facet name="input"> <p:inputText value="#{item.code}" style="width:100%"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Autor" styleClass="tablecolum">
+                    <p:cellEditor>
+                        <f:facet name="output"> <h:outputText value="#{item.name}"/> </f:facet>
+                        <f:facet name="input"> <p:inputText value="#{item.name}" style="width:100%"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Código" styleClass="tablecolum">
+                    <p:cellEditor>
+                        <f:facet name="output"> <h:outputText value="#{item.autor}"/> </f:facet>
+                        <f:facet name="input"> <p:inputText value="#{item.autor}" style="width:100%"/> </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column style="width:35px" styleClass="tablecolum">
+                </p:column>
+
+            </p:dataTable>
+
+            <p:separator/>
+
+            <br></br>
+
+            <h1>ATENDENTE</h1>
+            <p:growl id="msg"/>
+
+            <h:form id="formclerk">
+
+                <!-- Lista datatable-->
+                <p:dataTable styleClass="tabelalivros" id="tabela"
+                             var="item"
+                             value="#{atendenteBean.atendentes}"
+                             editable="true">
+
+                    <p:column styleClass="tablecolum" style="width:100px">
+
+                    </p:column>
+
+                    <p:column headerText="CPF" styleClass="tablecolum">
+                        <p:cellEditor >
+                            <f:facet  name="output"> <h:outputText value="#{item.cpfatendete}"/> </f:facet>
+                            <f:facet name="input"> <p:inputText value="#{item.cpfatendete}" style="width:100%"/> </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Nome" styleClass="tablecolum">
+                        <p:cellEditor>
+                            <f:facet name="output"> <h:outputText value="#{item.nomeAtendente}"/> </f:facet>
+                            <f:facet name="input"> <p:inputText value="#{item.nomeAtendente}" style="width:100%"/> </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Matricula" styleClass="tablecolum">
+                        <p:cellEditor>
+                            <f:facet name="output"> <h:outputText value="#{item.matriculaAtendente}"/> </f:facet>
+                            <f:facet name="input"> <p:inputText value="#{item.matriculaAtendente}" style="width:100%"/> </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Cargo" styleClass="tablecolum">
+                        <p:cellEditor>
+                            <f:facet name="output"> <h:outputText value="#{item.cargoAtendente}"/> </f:facet>
+                            <f:facet name="input"> <p:inputText value="#{item.cargoAtendente}" style="width:100%"/> </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column style="width:35px" styleClass="tablecolum">
+
+                    </p:column>
+
+                </p:dataTable>
+                <p:separator/>
+                <div style="text-align: end">
+                </div>
+
+                <br></br>
+
+                <h1>SERVIÇO</h1>
+                <p:growl id="msg"/>
+                <h:form id="formservice">
+
+                    <p:dataTable styleClass="tabelalivros" id="tabela"
+                                 var="item"
+                                 value="#{servicoBean.servicos}"
+                                 editable="true">
+
+                        <p:column style="width:100px" styleClass="tablecolum">  
+                        </p:column>
+
+                        <p:column headerText="Serviço" styleClass="tablecolum">
+                            <h:outputText value="#{item.tiposervico}"/>
+                        </p:column>
+
+                        <p:column headerText="Livro" styleClass="tablecolum">
+                            <h:outputText value="#{item.livro}"/>
+                        </p:column>
+
+                        <p:column headerText="Cliente" styleClass="tablecolum">
+                            <p:cellEditor>
+                                <f:facet name="output"> <h:outputText value="#{item.cpfcliente}"/> </f:facet>
+                                <f:facet name="input"> <p:spinner value="0"/> </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Data de Emprestimo" styleClass="tablecolum">
+                            <h:outputText value="#{item.dataemprestimo}"/>
+                        </p:column>
+
+                        <p:column headerText="Data de devolução" styleClass="tablecolum">
+                            <h:outputText  style="" value="#{item.datadevolucao}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column style="width: 35px" styleClass="tablecolum">
+
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </h:form>
+        </h:form>
+          <!--<p:graphicImage url="#{usuarioBean.IMAGEM}"/>-->
+
+    </ui:define>
+
+</ui:decorate>
+
